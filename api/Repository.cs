@@ -11,6 +11,9 @@ namespace ProteinTrackerMVC.api
     public interface  IRepository
     {
         long AddUser(string name, int goal);
+        IEnumerable<User> GetUsers();
+        User GetUsers(long userId);
+        void UpdateUser(User user);
     }
     public class Repository : IRepository
     {
@@ -26,12 +29,41 @@ namespace ProteinTrackerMVC.api
             using (var redisclient = RedisManager.GetClient())
             {
                 var redisUsers = redisclient.As<User>();
-                var user = new User() {Name = name, Goal = goal, ID = redisUsers.GetNextSequence()};
+                var user = new User() {Name = name, Goal = goal, Id = redisUsers.GetNextSequence()};
                 redisUsers.Store(user);
-                return user.ID;
+                return user.Id;
                 ;
 
                 ;
+            }
+        }
+
+        public IEnumerable<User> GetUsers()
+        {
+            using (var redisclient = RedisManager.GetClient())
+            {
+                var redisUsers = redisclient.As<User>();
+                return redisUsers.GetAll();
+            }
+        }
+
+        public User GetUsers(long userId)
+        {
+            using (var redisclient = RedisManager.GetClient())
+            {
+                var redisUsers = redisclient.As<User>();
+                return redisUsers.GetById(userId);
+            
+
+            }
+        }
+
+        public void UpdateUser(User user)
+        {
+            using (var redisclient = RedisManager.GetClient())
+            {
+                var redisUsers = redisclient.As<User>();
+                redisUsers.Store(user);
             }
         }
     }

@@ -5,11 +5,11 @@ using System.Text;
 
 namespace ProteinTrackerMVC.api
 {
-    class User
+    public class User
     {
         public string Name { get; set; }
         public int Goal { get; set; }
         public int Total { get; set; }
-        public long ID { get; set; }
+        public long Id { get; set; }
     }
 }
