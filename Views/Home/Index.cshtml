@@ -1,0 +1,53 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Protein Tracker";
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        
+        function AddNewUser() {
+            var goal = $('#goal').val();
+            var name = $('#name').val();
+
+
+            $.post("api/users", { 'Name': name, "Goal": goal });
+            
+        }
+
+    </script>
+}
+
+<h2>Protein Tracker</h2>
+<div>
+    
+    <label for="select-user"> Select A user</label> 
+    <select id="select-user"></select>
+</div>
+
+<hr />
+
+<div>
+    <h2>Add a new user</h2>
+    <label for="name">Name</label>
+    <input id="name" type="text"/> <br />
+    <label for="goal">Goal</label>
+    <input id="goal" type="text"/> <br />
+    <input id="add-new-user-button" type="button" value="Add" onclick="AddNewUser()"/>
+</div>
+
+<div>
+    <h2>Add Protein</h2>
+    <label for="amount">Amount</label>
+    <input id="amount" type="text"/> <br />
+    <input id="add-button" type="button" value="Add"/>
+
+</div>
+<div>
+    <p>Total: <span id="user-total"></span></p>
+    <p>Goal <span id="user-goal"></span></p>
+</div>
