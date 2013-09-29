@@ -37,37 +37,5 @@ namespace ProteinTrackerMVC.api
         }
     }
 
-    public class AddProteinResponse
-    {
-        public int NewTotal { get; set; }
-    }
-
-    [Route("/users/{userid}", "POST")]
-    public class AddProtein
-    {
-        public long UserID { get; set; }
-        public int Amount { get; set; }
-    }
-
-    public class UserResponse
-    {
-       public IEnumerable<User> Users { get; set; } 
-    }
-
-    [Route("/users", "GET")]
-    public class Users
-    {
-    }
-
-    public class AddUserResponse
-    {
-        public long UserID { get; set; }
-    }
-
-    [Route("/users", "POST")]
-    public class AddUser
-    {
-        public string Name { get; set; }
-        public int Goal { get; set;}
-    }
+   
 }
