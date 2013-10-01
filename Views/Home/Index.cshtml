@@ -9,15 +9,48 @@
 @section scripts
 {
     <script type="text/javascript">
+
+        var _users;
+        $(document).ready(function() {
+
+            PopulateSelectUsers();
+            
+
+        });
         
+        // add new users function
         function AddNewUser() {
             var goal = $('#goal').val();
             var name = $('#name').val();
 
 
             $.post("api/users", { 'Name': name, "Goal": goal });
-            
+
         }
+
+        ;
+
+        function PopulateSelectUsers()
+        {
+            var selectUser = $('#select-user');
+            selectUser.empty();
+            $.getJSON("api/users", function(data) {
+                _users = data.Users;
+                for (var i = 0; i < _users.length; i++) {
+                    selectUser.append($("<option></option>")
+                        .attr("value", _users[i].Id)
+                        .text(_users[i].Name)
+                    );
+                }
+                
+            });
+
+        }
+        ;
+        
+
+        
+
 
     </script>
 }
